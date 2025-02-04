@@ -82,7 +82,7 @@ window.onload = function(){
     document.addEventListener("keydown", moveDinosaur);
 
     document.getElementById("resetButton").addEventListener("click", resetGame);
-}
+};
 
 function update(){
     requestAnimationFrame(update);
@@ -110,6 +110,8 @@ function update(){
             dinoImg.onload = function() {
                context.drawImage(dinoImg, dino.x, dino.y, dino.width, dino.height);
            };
+            // show the botton reset game
+            document.getElementById("resetButton").style.display = "block";
         }
 
         if(cactus.x + cactus.width < dino.x && !cactus.passed) {
