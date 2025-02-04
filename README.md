@@ -13,3 +13,4 @@
   alert explain game
   back story of dinosour
  
+Link:https://andreipor.github.io/dino_game_assignements/

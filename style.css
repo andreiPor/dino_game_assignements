@@ -1,7 +1,11 @@
+/* General styles */
 body {
     font-family: 'Courier New', Courier, monospace;
     background-color: rgb(233, 236, 237);
     text-align: center;
+    scroll-behavior: none;
+    margin: 0;
+    padding: 0;
 }
 
 h1 {
@@ -18,7 +22,15 @@ h1 {
     margin: 0 auto;
     display: block;
 }
+.sun{
+    width: 60px;
+    height: 40px;
+    position: absolute;
+    top: 9%;
+    left: 65%;
+}
 
+/* Scoreboard styles */
 #scoreBoard {
     font-size: 24px;
     font-weight: bold;
@@ -30,21 +42,102 @@ h1 {
     padding: 5px;
     border-radius: 5px;
 }
+
+/* Button styles */
 #resetButton {
-    background-color: rgb(233, 236, 237); 
+    background-color: rgb(233, 236, 237);
     border: none;
+    display: none;
     padding: 10px 20px;
     font-size: 16px;
     font-weight: bold;
-    color: #333; 
-    border-radius: 8px; 
+    color: #333;
+    border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    left: 46%;
+    top: 35%;
 }
 
+/* Button hover effect */
 #resetButton:hover {
-    background-color: rgb(200, 200, 200); 
-    transform: scale(1.05); 
+    background-color: rgb(200, 200, 200);
+    transform: scale(1.05);
 }
 
+
+/* Responsive styles */
+@media (max-width: 896px) {
+    h1 {
+        font-size: 1.5em; 
+    }
+
+    #board {
+        width: 90%; 
+        height: auto;
+    }
+
+    #resetButton {
+        background-color: rgb(233, 236, 237);
+        border: none;
+        display: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        color: #333;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        position: absolute;
+        left: 42%;
+        top: 72%;
+        
+    }
+    .sun{
+        width: 60px;
+        height: 40px;
+        position: absolute;
+        top: 15%;
+        left: 84%;
+    }
+    
+}
+@media (max-width: 600px) {
+    h1 {
+        font-size: 1.5em; 
+    }
+
+    #board {
+        width: 90%; 
+        height: auto;
+    }
+
+    #resetButton {
+        background-color: rgb(233, 236, 237);
+        border: none;
+        display: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        color: #333;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        position: absolute;
+        left: 33%;
+        top: 17%;
+        
+    }
+    .sun{
+        width: 50px;
+        height: 30px;
+        position: absolute;
+        top: 6.55%;
+        left: 78%;
+    }
+    
+}
