@@ -10,3 +10,4 @@
   game over + message "you lost"
   create a resetGame()
  
+Link:https://andreipor.github.io/dino_game_assignements/
