@@ -1,5 +1,7 @@
 const LOSE_SOUND = new Audio("/audio/game-over.mp3");
 const JUMP_SOUND = new Audio("/audio/jump.mp3");
+LOSE_SOUND.preload = "auto";
+JUMP_SOUND.preload = "auto";
 
 let board;
 let boardWidth = 750;
