@@ -30,4 +30,21 @@ h1 {
     padding: 5px;
     border-radius: 5px;
 }
+#resetButton {
+    background-color: rgb(233, 236, 237); 
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333; 
+    border-radius: 8px; 
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+#resetButton:hover {
+    background-color: rgb(200, 200, 200); 
+    transform: scale(1.05); 
+}
 
