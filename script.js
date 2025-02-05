@@ -3,6 +3,10 @@ const JUMP_SOUND = new Audio("./audio/jump.mp3");
 LOSE_SOUND.preload = "auto";
 JUMP_SOUND.preload = "auto";
 
+const backgroundMusic = new Audio("audio/dino-dance.mp3");
+backgroundMusic.loop = true;
+backgroundMusic.volume = 0.5;
+
 let board;
 let boardWidth = 750;
 let boardHeight = 320;
@@ -60,12 +64,14 @@ let score = 0;
 getStory();
 
 window.onload = function () {
+//  alert("Press OK to start the game!");
+  backgroundMusic.play();
+
   board = document.getElementById("board");
   board.height = boardHeight;
   board.width = boardWidth;
 
   context = board.getContext("2d");
-  // Load images
   dinoImg = new Image();
   dinoImg.src = "./img/dino.png";
 
@@ -86,7 +92,6 @@ window.onload = function () {
   setInterval(moveBird, 50);
 
   document.addEventListener("keydown", moveDinosaur);
-
   document.getElementById("resetButton").addEventListener("click", resetGame);
 };
 
@@ -98,12 +103,10 @@ function update() {
 
   context.clearRect(0, 0, board.width, board.height);
 
-  // dino
   velocityY += gravity;
   dino.y = Math.min(dino.y + velocityY, dinoY);
   context.drawImage(dinoImg, dino.x, dino.y, dino.width, dino.height);
 
-  // cactus
   for (let i = 0; i < cactusArray.length; i++) {
     let cactus = cactusArray[i];
     cactus.x += velocityX;
@@ -119,10 +122,12 @@ function update() {
       gameOver = true;
       LOSE_SOUND.play();
       dinoImg.src = "./img/dino-dead.png";
-      // function to reload dino-dead.png
       dinoImg.onload = function () {
         context.drawImage(dinoImg, dino.x, dino.y, dino.width, dino.height);
       };
+      document.getElementById("resetButton").style.display = "block";
+      backgroundMusic.pause();
+      backgroundMusic.currentTime = 0;
     }
 
     if (cactus.x + cactus.width < dino.x && !cactus.passed) {
@@ -131,10 +136,8 @@ function update() {
     }
   }
 
-  // bird
   context.drawImage(birdImg, bird.x, bird.y, bird.width, bird.height);
 
-  // score
   context.fillStyle = "black";
   context.font = "20px Arial";
   context.fillText("Score: " + score, 10, 30);
@@ -184,7 +187,6 @@ function placeCactus() {
     cactusArray.shift();
   }
 }
-// function for bird movements
 function moveBird() {
   if (gameOver) {
     return;
@@ -203,7 +205,7 @@ function detectCollision(a, b) {
     a.y + a.height > b.y
   );
 }
-// function to reset the game
+
 function resetGame() {
   location.reload();
 }
