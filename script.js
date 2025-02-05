@@ -186,7 +186,6 @@ function placeCactus() {
     cactusArray.shift();
   }
 }
-
 function moveBird() {
   if (gameOver) {
     return;
