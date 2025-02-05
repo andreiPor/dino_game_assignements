@@ -57,13 +57,14 @@ let gravity = 0.4;
 let gameOver = false;
 let score = 0;
 
+getStory();
+
 window.onload = function () {
   board = document.getElementById("board");
   board.height = boardHeight;
   board.width = boardWidth;
 
   context = board.getContext("2d");
-
   // Load images
   dinoImg = new Image();
   dinoImg.src = "./img/dino.png";
@@ -205,4 +206,17 @@ function detectCollision(a, b) {
 // function to reset the game
 function resetGame() {
   location.reload();
+}
+
+function getStory() {
+  alert(
+    `Once upon a time , approximately 245 million years ago on earth 🌎 There lived...  `
+  );
+  alert(
+    `Drax 🦕 , the champion of the T-Rex Cactus Jumping Olympia 245 million BC.`
+  );
+  alert(`And on this day the newbie, Dino 🦖, has come to take that title 🏆 `);
+  alert(
+    `Drax 🦕 : Think you can beat me,  you have another thing coming. Hope your keyboard doesn't break 😈!`
+  );
 }
