@@ -62,7 +62,7 @@ let gameOver = false;
 let score = 0;
 
 window.onload = function () {
- alert("Press OK to start the game!");
+//  alert("Press OK to start the game!");
   backgroundMusic.play();
 
   board = document.getElementById("board");
