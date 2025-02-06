@@ -11,6 +11,7 @@ let board;
 let boardWidth = 750;
 let boardHeight = 320;
 let context;
+let hasRunOnce = false;
 
 // dino
 let dinoWidth = 88;
@@ -61,8 +62,17 @@ let gravity = 0.4;
 let gameOver = false;
 let score = 0;
 
-window.onload = function () {
-//  alert("Press OK to start the game!");
+document.addEventListener("keydown", moveDinosaur);
+document.getElementById("resetButton").addEventListener("click", resetGame);
+
+window.addEventListener("DOMContentLoaded", play);
+
+function play() {
+  if (!localStorage.getItem("firstLoad")) {
+    getStory();
+    localStorage.setItem("firstLoad", "true");
+  }
+  //  alert("Press OK to start the game!");
   backgroundMusic.play();
 
   board = document.getElementById("board");
@@ -70,7 +80,6 @@ window.onload = function () {
   board.width = boardWidth;
 
   context = board.getContext("2d");
-
   dinoImg = new Image();
   dinoImg.src = "./img/dino.png";
 
@@ -89,10 +98,7 @@ window.onload = function () {
   requestAnimationFrame(update);
   setInterval(placeCactus, 1000);
   setInterval(moveBird, 50);
-
-  document.addEventListener("keydown", moveDinosaur);
-  document.getElementById("resetButton").addEventListener("click", resetGame);
-};
+}
 
 function update() {
   requestAnimationFrame(update);
@@ -207,4 +213,15 @@ function detectCollision(a, b) {
 
 function resetGame() {
   location.reload();
+}
+
+function getStory() {
+  alert(
+    `Once upon a time , approximately 245 million years ago on earth 🌎 There lived...  `
+  );
+  alert(`Drax 🦕 , the champion of the T-Rex Cactus Jumping Olympia.`);
+  alert(`And on this day the newbie, Dino 🦖, has come to take that title 🏆 `);
+  alert(
+    `Drax 🦕 : Think you can beat me,  you have another thing coming. Hope your keyboard doesn't break 😈!`
+  );
 }
