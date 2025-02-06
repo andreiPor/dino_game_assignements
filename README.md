@@ -1,16 +1,25 @@
-# dino_game_assignements
- jumpping dino
- create a score board
- create reset and cancel buton
- add bird element 
- responsive
+##Dinosaur Game##
+  Jump over cacti and achieve the highest score.
 
- Mike part
-  sound effects
-  game start when the user is pushing spacebar
-  game over + message "you lost"
-  create a resetGame()
-  alert explain game
-  back story of dinosour
- 
+ ##Features##
+
+-jump to avoid cacti
+
+-dynamic scoring system
+
+-background music and sound effects
+
+-restart button
+
+##Technologies Used##
+
+-HTML5 for structure
+
+-CSS3 for styling
+
+-JavaScript for game logic
+
+Enjoy the game:
 Link:https://andreipor.github.io/dino_game_assignements/
+
+Developed by Andrei, Mike, Willy.
