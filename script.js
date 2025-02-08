@@ -1,63 +1,63 @@
 const LOSE_SOUND = new Audio("./audio/game-over.mp3");
 const JUMP_SOUND = new Audio("./audio/jump.mp3");
+const BOARDWIDTH = 750;
+const BOARDHEIGHT = 320;
 LOSE_SOUND.preload = "auto";
 JUMP_SOUND.preload = "auto";
 
-const backgroundMusic = new Audio("audio/dino-dance.mp3");
-backgroundMusic.loop = true;
-backgroundMusic.volume = 0.5;
+const BACKGROUNDMUSIC = new Audio("audio/dino-dance.mp3");
+BACKGROUNDMUSIC.loop = true;
+BACKGROUNDMUSIC.volume = 0.5;
 
 let board;
-let boardWidth = 750;
-let boardHeight = 320;
 let context;
 let hasRunOnce = false;
 
 // dino
-let dinoWidth = 88;
-let dinoHeight = 94;
-let dinoX = 50;
-let dinoY = boardHeight - dinoHeight;
+const DINOWIDTH = 88;
+const DINOHEIGHT = 94;
+const DINO_X = 50;
+const DINO_Y = BOARDHEIGHT - DINOHEIGHT;
 let dinoImg;
 
-let dino = {
-  x: dinoX,
-  y: dinoY,
-  width: dinoWidth,
-  height: dinoHeight,
+const DINO = {
+  x: DINO_X,
+  y: DINO_Y,
+  width: DINOWIDTH,
+  height: DINOHEIGHT,
 };
 
 // cactus
 let cactusArray = [];
-let cactus1Width = 34;
-let cactus2Width = 69;
-let cactus3Width = 90;
-let cactusHeight = 70;
-let cactusX = 700;
-let cactusY = boardHeight - cactusHeight;
+const CACTUSWIDTH = 34;
+const CACTUS2WIDTH = 69;
+const CACTUS3WIDTH = 90;
+const CACTUSHEIGHT = 70;
+const CACTUS_X = 700;
+const CACTUS_Y = BOARDHEIGHT - CACTUSHEIGHT;
 
 let cactus1Img;
 let cactus2Img;
 let cactus3Img;
 
 // bird
-let birdWidth = 50;
-let birdHeight = 40;
-let birdX = boardWidth;
-let birdY = 50;
+const BIRDWIDTH = 50;
+const BIRDHEIGHT = 40;
+const BIRD_X = BOARDWIDTH;
+const BIRD_Y = 50;
 let birdImg;
 
-let bird = {
-  x: birdX,
-  y: birdY,
-  width: birdWidth,
-  height: birdHeight,
+const BIRD = {
+  x: BIRD_X,
+  y: BIRD_Y,
+  width: BIRDWIDTH,
+  height: BIRDHEIGHT,
 };
 
 // physics
-let velocityX = -10;
+const VELOCITY_X = -10;
 let velocityY = 0;
-let gravity = 0.4;
+const GRAVITY = 0.4;
 
 let gameOver = false;
 let score = 0;
@@ -73,11 +73,11 @@ function play() {
     localStorage.setItem("firstLoad", "true");
   }
   //  alert("Press OK to start the game!");
-  backgroundMusic.play();
+  BACKGROUNDMUSIC.play();
 
   board = document.getElementById("board");
-  board.height = boardHeight;
-  board.width = boardWidth;
+  board.height = BOARDHEIGHT;
+  board.width = BOARDWIDTH;
 
   context = board.getContext("2d");
   dinoImg = new Image();
@@ -108,13 +108,13 @@ function update() {
 
   context.clearRect(0, 0, board.width, board.height);
 
-  velocityY += gravity;
-  dino.y = Math.min(dino.y + velocityY, dinoY);
-  context.drawImage(dinoImg, dino.x, dino.y, dino.width, dino.height);
+  velocityY += GRAVITY;
+  DINO.y = Math.min(DINO.y + velocityY, DINO_Y);
+  context.drawImage(dinoImg, DINO.x, DINO.y, DINO.width, DINO.height);
 
   for (let i = 0; i < cactusArray.length; i++) {
     let cactus = cactusArray[i];
-    cactus.x += velocityX;
+    cactus.x += VELOCITY_X;
     context.drawImage(
       cactus.img,
       cactus.x,
@@ -123,25 +123,26 @@ function update() {
       cactus.height
     );
 
-    if (detectCollision(dino, cactus)) {
+    if (detectCollision(DINO, cactus)) {
       gameOver = true;
+      localStorage.setItem('score', score);
       LOSE_SOUND.play();
       dinoImg.src = "./img/dino-dead.png";
       dinoImg.onload = function () {
-        context.drawImage(dinoImg, dino.x, dino.y, dino.width, dino.height);
+        context.drawImage(dinoImg, DINO.x, DINO.y, DINO.width, DINO.height);
       };
       document.getElementById("resetButton").style.display = "block";
-      backgroundMusic.pause();
-      backgroundMusic.currentTime = 0;
+      BACKGROUNDMUSIC.pause();
+      BACKGROUNDMUSIC.currentTime = 0;
     }
 
-    if (cactus.x + cactus.width < dino.x && !cactus.passed) {
+    if (cactus.x + cactus.width < DINO.x && !cactus.passed) {
       score += 5;
       cactus.passed = true;
     }
   }
 
-  context.drawImage(birdImg, bird.x, bird.y, bird.width, bird.height);
+  context.drawImage(birdImg, BIRD.x, BIRD.y, BIRD.width, BIRD.height);
 
   context.fillStyle = "black";
   context.font = "20px Arial";
@@ -152,7 +153,7 @@ function moveDinosaur(e) {
   if (gameOver) {
     return;
   }
-  if ((e.code == "Space" || e.code == "ArrowUp") && dino.y == dinoY) {
+  if ((e.code == "Space" || e.code == "ArrowUp") && DINO.y == DINO_Y) {
     JUMP_SOUND.play();
     velocityY = -10;
   }
@@ -165,10 +166,10 @@ function placeCactus() {
 
   let cactus = {
     img: null,
-    x: cactusX,
-    y: cactusY,
+    x: CACTUS_X,
+    y: CACTUS_Y,
     width: null,
-    height: cactusHeight,
+    height: CACTUSHEIGHT,
     passed: false,
   };
 
@@ -176,15 +177,15 @@ function placeCactus() {
 
   if (placeCactusChance > 0.9) {
     cactus.img = cactus3Img;
-    cactus.width = cactus3Width;
+    cactus.width = CACTUS3WIDTH;
     cactusArray.push(cactus);
   } else if (placeCactusChance > 0.7) {
     cactus.img = cactus2Img;
-    cactus.width = cactus2Width;
+    cactus.width = CACTUS2WIDTH;
     cactusArray.push(cactus);
   } else if (placeCactusChance > 0.5) {
     cactus.img = cactus1Img;
-    cactus.width = cactus1Width;
+    cactus.width = CACTUSWIDTH;
     cactusArray.push(cactus);
   }
 
@@ -196,9 +197,9 @@ function moveBird() {
   if (gameOver) {
     return;
   }
-  bird.x += velocityX;
-  if (bird.x + bird.width < 0) {
-    bird.x = boardWidth;
+  BIRD.x += VELOCITY_X;
+  if (BIRD.x + BIRD.width < 0) {
+    BIRD.x = BOARDWIDTH;
   }
 }
 
